@@ -1,0 +1,23 @@
+/* CSS Reset */
+*{
+    margin: 0%;
+    padding: 0%;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+h1{
+    margin: 5%;
+    
+}
+
+#formularioCadastro{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    gap: 5px;
+    border-color: black;
+}
+
+
