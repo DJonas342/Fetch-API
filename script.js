@@ -1,15 +1,20 @@
-document.addEventListener('DOMContentLoaded', ()=> {
-    const cep = sessionStorage.getItem("cep");
-    if(cep && cep.length === 8){
-        document.getElementById("cep").value = cep;
-    }
-})
-//1. Pegar valor do campo CEP e adicionar ouvinte 
+//1. Buscar dados e carrega-los nos campos para os campos de endereço
+document.addEventListener('DOMContentLoad', ()=> {
+    const adress = ["cep", "logradouro", "bairro", "cidade", "estado"];
+
+    adress.forEach(campos => {
+        const valor = sessionStorage.getItem(campos);
+        if (valor) {
+            document.getElementById(campos).value = valor;
+        }
+    });
+});
+
+//2. Pegar valor do campo CEP e adicionar ouvinte 
 document.getElementById("cep").addEventListener("blur", (evento) => {
-        const elemento = evento.target;
-        const cepInformado = elemento.value;
+        const cepInformado = evento.target.value.trim();
         sessionStorage.setItem("cep", cepInformado);
-//2.Validação do CEP 
+//3.Validação do CEP 
     if(!(cepInformado.length === 8)){
         return;
     }else{
@@ -22,6 +27,12 @@ document.getElementById("cep").addEventListener("blur", (evento) => {
                 document.getElementById('bairro').value = data.bairro
                 document.getElementById('cidade').value = data.localidade
                 document.getElementById('estado').value = data.uf
+            
+            //Salvando os dados dos campos 
+                sessionStorage.setItem("logradouro", data.logradouro);
+                sessionStorage.setItem("bairro", data.bairro);
+                sessionStorage.setItem("cidade", data.localidade);
+                sessionStorage.setItem("estado", data.uf);
             } else {
                 alert("CEP não encontrado");
             }
